@@ -47,7 +47,7 @@ const DetailsScreen = ({ navigation }) => {
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             {pokemonDetails?.types?.map((item, index) => {
               return (
-                <View style={styles.typeView}>
+                <View key={index} style={styles.typeView}>
                   <Text style={styles.typeText}>{item?.type?.name}</Text>
                 </View>
               )

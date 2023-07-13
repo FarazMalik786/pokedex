@@ -10,7 +10,7 @@ import ErrorModal from '../../common/ErrorModal.jsx/ErrorModal'
 
 const SearchScreen = ({ navigation }) => {
   const [inputValue, setinputValue] = useState("");
-  const [pokemonDetails, setPokemonDetails] = useState({});
+  const [pokemonDetails, setPokemonDetails] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [isErrorVisible, setIsErrorVisible] = useState(false);
 
@@ -37,7 +37,7 @@ const SearchScreen = ({ navigation }) => {
     <View style={styles.container}>
      
 
-      <ImageBackground source={{ uri: "https://www.colorwallpapers.com/uploads/wallpaper/pokemon-wallpapers/width-853/3C1Kiv5M4Cck-wonderful-pokemon-backgrounds-image-for-computer.jpg" }}
+      <ImageBackground source={require('../../assets/images/searchScreenWallpaper.jpeg')}
         style={styles.backgroundimage}
       >
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.goBackIcon}>
@@ -66,9 +66,11 @@ const SearchScreen = ({ navigation }) => {
         {
           isLoading ?
             <Spinner />
-            :
+            : 
+            pokemonDetails &&
             <TouchableOpacity style={styles.searchedPokemonView}
               onPress={() => navigation.navigate("detailsscreen", { pokemonDetails: pokemonDetails })}
+              
             >
               <Image source={{ uri: pokemonDetails?.sprites?.other?.home.front_default }}
                 style={styles.searchedPokemonImage}

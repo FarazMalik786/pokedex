@@ -40,7 +40,7 @@ const FavoriteScreen = ({ navigation }) => {
                                 <Text style={styles.name}>{item?.name}</Text>
                                 <View style={{ flexDirection: "row", alignItems: "center" }}>
                                     {item?.types?.map((item, index) => {
-                                        return <View style={styles.typeContainer}>
+                                        return <View key={index} style={styles.typeContainer}>
                                             <Text style={styles.typeText}>{item?.type?.name}</Text>
                                         </View>
                                     })}
