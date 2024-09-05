@@ -18,14 +18,14 @@ const Cards = ({ item }) => {
             />
             <View>
                 <Text style={styles.name}>{item?.name}</Text>
-                <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+                {/* <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                     {item?.types?.map((item, index) => {
                         return <View key={index} style={styles.typeContainer}>
                             <Text style={{color:"white"}}>{typeIcons[item?.type?.name]}</Text>
                             <Text style={styles.typeText}>{item?.type?.name}</Text>
                         </View>
                     })}
-                </View>
+                </View> */}
             </View>
 
         </TouchableOpacity>

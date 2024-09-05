@@ -6,6 +6,7 @@ import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-nat
 import axios from 'axios'
 import Spinner from '../../common/spinner/Spinner'
 import ErrorModal from '../../common/ErrorModal.jsx/ErrorModal'
+import { useAddProductMutation, useGetAllProductsQuery } from '../../redux/FakeStoreApi'
 
 
 const SearchScreen = ({ navigation }) => {
@@ -13,6 +14,14 @@ const SearchScreen = ({ navigation }) => {
   const [pokemonDetails, setPokemonDetails] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [isErrorVisible, setIsErrorVisible] = useState(false);
+  const { data, isSuccess, isError, error } = useGetAllProductsQuery()
+  const [addProduct, { }] = useAddProductMutation()
+  if (isError) Alert.alert("ERROR")
+
+  if (isSuccess) {
+    console.log("data");
+  }
+  
 
   useEffect(() => {
     if (isErrorVisible) {
@@ -35,7 +44,7 @@ const SearchScreen = ({ navigation }) => {
   }
   return (
     <View style={styles.container}>
-     
+
 
       <ImageBackground source={require('../../assets/images/searchScreenWallpaper.jpeg')}
         style={styles.backgroundimage}
@@ -49,6 +58,13 @@ const SearchScreen = ({ navigation }) => {
             placeholderTextColor="#747476"
             style={styles.textInput}
             onChangeText={(v) => {
+              addProduct({
+                title: 'test product',
+                price: 13.5,
+                description: 'lorem ipsum set',
+                image: 'https://i.pravatar.cc',
+                category: 'electronic'
+              })
               if (v !== "" || v) {
                 setinputValue(v);
               } else {
@@ -66,11 +82,11 @@ const SearchScreen = ({ navigation }) => {
         {
           isLoading ?
             <Spinner />
-            : 
+            :
             pokemonDetails &&
             <TouchableOpacity style={styles.searchedPokemonView}
               onPress={() => navigation.navigate("detailsscreen", { pokemonDetails: pokemonDetails })}
-              
+
             >
               <Image source={{ uri: pokemonDetails?.sprites?.other?.home.front_default }}
                 style={styles.searchedPokemonImage}
